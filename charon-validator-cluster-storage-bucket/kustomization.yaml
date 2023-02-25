@@ -9,9 +9,11 @@ resources:
   - namespace.yaml
 configMapGenerator:
   - name: tc-config
-    files: ["teku_config.yaml"]
+    files: ["teku_config"]
     options:
       disableNameSuffixHash: true
+  - name: charon-config
+    files: [".charon"]
 images:
   - name: consensys/teku
     newTag: 22.11.0
