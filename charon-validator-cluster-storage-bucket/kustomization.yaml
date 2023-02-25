@@ -12,8 +12,38 @@ configMapGenerator:
     files: ["teku_config"]
     options:
       disableNameSuffixHash: true
-  - name: charon-config
-    files: [".charon"]
+  - name: node0
+    files: [".charon/cluster/node0"]
+    options:
+      disableNameSuffixHash: true
+  - name: node1
+    files: [".charon/cluster/node1"]
+    options:
+      disableNameSuffixHash: true
+  - name: node3
+    files: [".charon/cluster/node3"]
+    options:
+      disableNameSuffixHash: true
+  - name: node4
+    files: [".charon/cluster/node4"]
+    options:
+      disableNameSuffixHash: true
+  - name: node0-validator-keys
+    files: [".charon/cluster/node0/validator_keys"]
+    options:
+      disableNameSuffixHash: true
+  - name: node1-validator-keys
+    files: [".charon/cluster/node1/validator_keys"]
+    options:
+      disableNameSuffixHash: true
+  - name: node2-validator-keys
+    files: [".charon/cluster/node2/validator_keys"]
+    options:
+      disableNameSuffixHash: true
+  - name: node3-validator-keys
+    files: [".charon/cluster/node3/validator_keys"]
+    options:
+      disableNameSuffixHash: true
 images:
   - name: consensys/teku
     newTag: 22.11.0
