@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: teku
+spec:
+  selector:
+    matchLabels:
+      app: teku
+  serviceName: teku
+  template:
+    metadata:
+      labels:
+        app: teku
+    spec:
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: teku-validator
+          image: consensys/teku
+          args:
+          - validator-client
+          - --config-file "/opt/teku_config.yaml"
+          ports:
+            - containerPort: 5052
+              name: http-api
+            - containerPort: 5054
+              name: metrics
+            - containerPort: 9000
+              name: p2ptcp
+            - containerPort: 9000
+              protocol: UDP
+              name: p2pudp
+          readinessProbe:
+            tcpSocket:
+              port: 9000
+          livenessProbe:
+            tcpSocket:
+              port: 9000
+          startupProbe:
+            failureThreshold: 60
+            tcpSocket:
+              port: 9000
+          resources:
+            limits:
+              cpu: 8000m
+              memory: 16G
+            requests:
+              cpu: 1000m
+              memory: 4G
+          volumeMounts:
+            - mountPath: /opt/charon
+              name: validator-keys
+            - mountPath: /opt/data
+              name: chaindata
+            - mountPath: /opt
+              name: config
+      volumes:
+        - name: chaindata
+          persistentVolumeClaim:
+            claimName: chaindata-teku
+        - configMap:
+            name: tc-config
+          name: config
+        - configMap:
+            name: validator-keys
+          name: validator-keys
