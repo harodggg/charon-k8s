@@ -25,6 +25,7 @@ spec:
             - --execution-jwt=/opt/jwt/jwt.hex
             - --datadir=/opt/app/beacon/
             - --debug-level=info
+            - --purge-db
             - --http
             - --http-address=0.0.0.0
             - --http-port=5052
