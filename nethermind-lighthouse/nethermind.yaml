@@ -19,34 +19,26 @@ spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: nethermind
-          image: ethereum/client-go
+          image: nethermind/nethermind
           ports:
             - containerPort: 8545
-            - containerPort: 8546
             - containerPort: 8551
             - { containerPort: 30303, protocol: TCP }
             - { containerPort: 30303, protocol: UDP }
           args:
             [
-              "--http",
-              "--http.addr=0.0.0.0",
-              "--http.api=eth,net,web3,engine,admin",
-              "--http.vhosts=*",
-              "--http.corsdomain=*",
-              "--syncmode=full",
-              "--cache=4096",
-              "--ws",
-              "--ws.addr=0.0.0.0",
-              "--ws.api=eth,net,web3",
-              "--ws.origins=*",
-              "--graphql",
-              "--graphql.corsdomain=*",
-              "--graphql.vhosts=*",
-              "--authrpc.addr=0.0.0.0",
-              "--authrpc.vhosts=*",
-              "--authrpc.jwtsecret=/jwt/jwt.hex",
-              "--authrpc.port=8551",
-              "--txlookuplimit=0",
+                "--config=goerli",
+                "--datadir=data",
+                "--HealthChecks.Enabled=true",
+                "--JsonRpc.Enabled=true",
+                '--JsonRpc.JwtSecretFile="/root/jwt/jwt.hex"',
+                "--JsonRpc.EngineHost=0.0.0.0",
+                "--JsonRpc.EnginePort=8551",
+                "--JsonRpc.Host=0.0.0.0",
+                "--JsonRpc.Port=8545",
+                "--Sync.SnapSync=true",
+                "--Sync.AncientBodiesBarrier=4367322",
+                "--Sync.AncientReceiptsBarrier=4367322"
             ]
           resources:
             requests:
@@ -65,13 +57,14 @@ spec:
               port: 8545
           volumeMounts:
             - name: chaindata
-              mountPath: /root/.ethereum
+              mountPath: /nethermind/data
             - name: jwt
-              mountPath: /jwt
+              mountPath: /root/jwt
 
       volumes:
         - name: chaindata
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: chaindata-nethermind
         - configMap:
-            name: geth-jwt
+            name: nethermind-jwt
           name: jwt
