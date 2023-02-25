@@ -28,6 +28,7 @@ spec:
             - --purge-db
             - --http
             - --http-address=0.0.0.0
+            - --builder=http://mev-boost:18550
             - --http-port=5052
             - --metrics
             - --metrics-address=0.0.0.0

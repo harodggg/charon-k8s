@@ -31,3 +31,17 @@ spec:
       name: jsonrpc
   selector:
     app: lighthouse
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mev-boost
+spec:
+  ports:
+    - protocol: TCP
+      targetPort: 18550
+      port: 18550
+      name: http
+  selector:
+    app: mev-boost

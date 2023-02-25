@@ -7,6 +7,7 @@ resources:
   - nethermind.yaml
   - lighthouse.yaml
   - namespace.yaml
+  - mev-boost.yaml
 configMapGenerator:
   - name: nethermind-jwt
     files: ["jwt.hex"]
