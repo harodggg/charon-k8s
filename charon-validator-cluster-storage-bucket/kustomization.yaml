@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: charon-vcsb
+resources:
+  - pvc.yaml
+  - service.yaml
+  - charon.yaml
+  - teku.yaml
+  - namespace.yaml
+configMapGenerator:
+  - name: tc-config
+    files: ["teku_config.yaml"]
+    options:
+      disableNameSuffixHash: true
+images:
+  - name: consensys/teku
+    newTag: 22.11.0
+  - name: obolnetwork/charon
+    newTag: v0.13.0

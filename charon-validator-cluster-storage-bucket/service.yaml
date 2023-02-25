@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: charon-svc
+spec:
+  ports:
+    - protocol: TCP
+      targetPort: 3600
+      port: 3600
+      name: http
+  selector:
+    app: charon
