@@ -15,3 +15,9 @@
 ```bash
 kubectl apply -k nethermind-lighthouse-storage-bucket
 ```
+
+## 4, Install the cluster key
+
+```bash
+docker run --rm -v "$(pwd):/opt/charon" obolnetwork/charon:v0.13.0 create cluster --withdrawal-address="0x0257Cd0453243D228482f93F58b17adEA4F532B1" --nodes 4 --threshold 3 --name g-xbt
+```
