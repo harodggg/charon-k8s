@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: lighthouse
+spec:
+  selector:
+    matchLabels:
+      app: lighthouse
+  serviceName: lighthouse
+  template:
+    metadata:
+      labels:
+        app: lighthouse
+    spec:
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: beacon
+          image: sigp/lighthouse
+          args:
+            - lighthouse 
+            - bn
+            - --network=goerli
+            - --checkpoint-sync-url=https://goerli.checkpoint-sync.ethdevops.io
+            - --execution-endpoint=http://nethermind.chain-ndl.svc.cluster.local:8551
+            - --execution-jwt=/opt/jwt/jwt.hex
+            - --datadir=/opt/app/beacon/
+            - --debug-level=info
+            - --http
+            - --http-address=0.0.0.0
+            - --http-port=5052
+            - --metrics
+            - --metrics-address=0.0.0.0
+            - --metrics-port=5054
+            - --metrics-allow-origin="*"
+          ports:
+            - containerPort: 5052
+              name: http-api
+            - containerPort: 5054
+              name: metrics
+            - containerPort: 9000
+              name: p2ptcp
+            - containerPort: 9000
+              protocol: UDP
+              name: p2pudp
+          readinessProbe:
+            tcpSocket:
+              port: 9000
+          livenessProbe:
+            tcpSocket:
+              port: 9000
+          startupProbe:
+            failureThreshold: 60
+            tcpSocket:
+              port: 9000
+          resources:
+            limits:
+              cpu: 8000m
+              memory: 16G
+            requests:
+              cpu: 1000m
+              memory: 4G
+          volumeMounts:
+            - mountPath: /opt/app/beacon/
+              name: chaindata
+            - mountPath: /opt/jwt/
+              name: gethjwt
+      volumes:
+        - name: chaindata
+          persistentVolumeClaim:
+            claimName: chaindata-lighthouse
+        - configMap:
+            name: nethermind-jwt
+          name: gethjwt

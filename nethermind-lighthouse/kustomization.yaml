@@ -15,5 +15,5 @@ configMapGenerator:
 images:
   - name: nethermind/nethermind
     newTag: 1.17.0
-  - name: gcr.io/prysmaticlabs/prysm/beacon-chain
-    newTag: v3.1.1
+  - name: sigp/lighthouse
+    newTag: v3.4.0

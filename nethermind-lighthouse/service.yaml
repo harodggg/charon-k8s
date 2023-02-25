@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nethermind
+spec:
+  ports:
+    - protocol: TCP
+      targetPort: 8545
+      port: 8545
+      name: http
+    - protocol: TCP
+      targetPort: 8551
+      port: 8551
+      name: authrpc
+  selector:
+    app: nethermind
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lighthouse
+spec:
+  ports:
+    - protocol: TCP
+      targetPort: 4000
+      port: 4000
+      name: grpc
+    - protocol: TCP
+      targetPort: 3500
+      port: 3500
+      name: jsonrpc
+  selector:
+    app: lighthouse
