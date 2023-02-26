@@ -3,6 +3,9 @@ kind: StatefulSet
 metadata:
   name: besu
   namespace: besu
+  labels:
+    app.kubernetes.io/name: besu
+    app.kubernetes.io/release: "1.0.0"
 spec:
   selector:
     matchLabels:
@@ -15,6 +18,8 @@ spec:
     metadata:
       labels:
         app: besu
+        app.kubernetes.io/name: besu
+        app.kubernetes.io/release: "1.0.0"
     spec:
       terminationGracePeriodSeconds: 300
       securityContext:
@@ -24,11 +29,6 @@ spec:
       containers:
         - name: besu
           image: hyperledger/besu
-          ports:
-            - containerPort: 8545
-            - containerPort: 8551
-            - { containerPort: 30303, protocol: TCP }
-            - { containerPort: 30303, protocol: UDP }
           args:
             - --network=goerli            
             - --rpc-http-enabled=true     
@@ -42,6 +42,11 @@ spec:
             - --engine-jwt-secret=/besu/jwt.hex
             - --data-path=/besu/data
             - --nat-method=KUBERNETES
+          port:
+            - containerPort: 8545
+            - containerPort: 8551
+            - { containerPort: 30303, protocol: TCP }
+            - { containerPort: 30303, protocol: UDP }
           resources:
             requests:
               memory: 2G

@@ -14,6 +14,9 @@ spec:
   - name: "rlpx"
     port: 30303
     targetPort: 30303
+  - name: "auth-rpc"
+    port: 8551
+    targetPort: 8551
   selector:
     app.kubernetes.io/name: besu
     app.kubernetes.io/release: "1.0.0"
