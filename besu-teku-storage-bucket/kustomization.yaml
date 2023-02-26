@@ -8,6 +8,7 @@ resources:
   - teku.yaml
   - namespace.yaml
   - mev-boost.yaml
+  - geth.yaml
 
 configMapGenerator:
   - name: besu-jwt
