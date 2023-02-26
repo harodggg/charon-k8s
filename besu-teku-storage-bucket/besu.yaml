@@ -31,7 +31,9 @@ spec:
           image: hyperledger/besu
           args:
             - --network=goerli            
-            - --rpc-http-enabled=true     
+            - --rpc-http-enabled=true
+            - --p2p-host=0.0.0.0
+            - --p2p-port=30303 
             - --rpc-http-host=0.0.0.0     
             - --rpc-http-cors-origins="*" 
             - --rpc-ws-enabled=true       
@@ -41,7 +43,7 @@ spec:
             - --engine-rpc-enabled        
             - --engine-jwt-secret=/besu/jwt.hex
             - --data-path=/besu/data
-            - --nat-method=KUBERNETES
+            - --nat-method=NONE
           ports:
             - containerPort: 8545
             - containerPort: 8551
