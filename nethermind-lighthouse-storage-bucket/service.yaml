@@ -52,3 +52,21 @@ spec:
       name: http
   selector:
     app: mev-boost
+  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prysm
+spec:
+  ports:
+    - protocol: TCP
+      targetPort: 4000
+      port: 4000
+      name: grpc
+    - protocol: TCP
+      targetPort: 3500
+      port: 3500
+      name: jsonrpc
+  selector:
+    app: prysm
