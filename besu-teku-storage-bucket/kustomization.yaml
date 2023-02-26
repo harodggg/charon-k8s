@@ -5,9 +5,9 @@ resources:
   - pvc.yaml
   - service.yaml
 #  - besu.yaml
-  - teku.yaml
+#  - teku.yaml
   - namespace.yaml
-  - mev-boost.yaml
+#  - mev-boost.yaml
 # - geth.yaml
   - nethermind.yaml
 

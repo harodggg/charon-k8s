@@ -56,7 +56,7 @@ spec:
               path: /
               port: 8545
           volumeMounts:
-            - name: chaindata
+            - name: chaindatan
               mountPath: /nethermind/data
             - name: jwt
               mountPath: /root/jwt
@@ -104,7 +104,7 @@ spec:
               name: jwt  
 
       volumes:
-        - name: chaindata
+        - name: chaindatan
           persistentVolumeClaim:
             claimName: chaindata-nethermind
         - name: chaindata
