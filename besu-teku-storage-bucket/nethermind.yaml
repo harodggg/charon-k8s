@@ -30,12 +30,10 @@ spec:
                 "--config=goerli",
                 "--log=INFO",
                 "--datadir=data",
-                "--HealthChecks.Enabled=false",
+                "--HealthChecks.Enabled=true",
                 "--JsonRpc.Enabled=true",
                 '--JsonRpc.JwtSecretFile="/root/jwt/jwt.hex"',
                 '--JsonRpc.EnabledModules=["Eth", "Subscribe", "Trace", "TxPool", "Web3", "Personal", "Proof", "Net", "Parity", "Health"]',
-                "--JsonRpc.EngineHost=0.0.0.0",
-                "--JsonRpc.EnginePort=8551",
                 "--JsonRpc.Host=0.0.0.0",
                 "--JsonRpc.Port=8545",
                 "--Sync.SnapSync=true",
@@ -62,11 +60,56 @@ spec:
               mountPath: /nethermind/data
             - name: jwt
               mountPath: /root/jwt
+        - name: beacon
+          image: consensys/teku
+          args:
+            - --network=goerli                             
+            - --ee-endpoint=http://localhost:8551          
+            - --ee-jwt-secret-file=/root/jwt.hex
+            - --metrics-enabled=true                       
+            - --rest-api-enabled=true
+            - --data-path=/opt/app/beacon/
+
+          ports:
+            - containerPort: 5052
+              name: http-api
+            - containerPort: 5054
+              name: metrics
+            - containerPort: 9000
+              name: p2ptcp
+            - containerPort: 9000
+              protocol: UDP
+              name: p2pudp
+          readinessProbe:
+            tcpSocket:
+              port: 9000
+          livenessProbe:
+            tcpSocket:
+              port: 9000
+          startupProbe:
+            failureThreshold: 60
+            tcpSocket:
+              port: 9000
+          resources:
+            limits:
+              cpu: 8000m
+              memory: 16G
+            requests:
+              cpu: 1000m
+              memory: 4G
+          volumeMounts:
+            - mountPath: /opt/app/beacon/
+              name: chaindata
+            - mountPath: /root/
+              name: jwt  
 
       volumes:
         - name: chaindata
           persistentVolumeClaim:
             claimName: chaindata-nethermind
+        - name: chaindata
+          persistentVolumeClaim:
+            claimName: chaindata-teku
         - configMap:
             name: besu-jwt
           name: jwt
