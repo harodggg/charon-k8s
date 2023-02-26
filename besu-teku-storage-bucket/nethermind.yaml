@@ -34,7 +34,7 @@ spec:
                 "--JsonRpc.Enabled=true",
                 '--JsonRpc.JwtSecretFile="/root/jwt/jwt.hex"',
                 '--JsonRpc.EnabledModules=["Eth", "Subscribe", "Trace", "TxPool", "Web3", "Personal", "Proof", "Net", "Parity", "Health"]',
-                "--JsonRpc.EngineHost=0.0.0.0",
+                "--JsonRpc.EngineHost=http://nethermind.besu-teku.svc.cluster.local:8551/",
                 "--JsonRpc.EnginePort=8551",
                 "--JsonRpc.Host=*",
                 "--JsonRpc.Port=8545",
