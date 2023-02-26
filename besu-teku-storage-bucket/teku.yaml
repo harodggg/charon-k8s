@@ -21,7 +21,7 @@ spec:
             - --ee-endpoint=http://besu.besu-teku.svc.cluster.local:8551          
             - --ee-jwt-secret-file=/root/jwt.hex
             - --metrics-enabled=true                       
-            - --rest-api-enabled=tru
+            - --rest-api-enabled=true
             - --data-path=/opt/app/beacon/
 
           ports:
