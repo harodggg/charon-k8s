@@ -17,6 +17,10 @@ spec:
         app: besu-teku
     spec:
       terminationGracePeriodSeconds: 300
+      securityContext:
+        fsGroup: 0
+        runAsUser: 0
+        runAsGroup: 0
       containers:
         - name: besu-teku
           image: hyperledger/besu
