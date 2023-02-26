@@ -42,7 +42,7 @@ spec:
             - --engine-jwt-secret=/besu/jwt.hex
             - --data-path=/besu/data
             - --nat-method=KUBERNETES
-          port:
+          ports:
             - containerPort: 8545
             - containerPort: 8551
             - { containerPort: 30303, protocol: TCP }
