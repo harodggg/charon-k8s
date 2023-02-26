@@ -35,8 +35,8 @@ spec:
             - --host-allowlist="*"        
             - --engine-host-allowlist="*" 
             - --engine-rpc-enabled        
-            - --engine-jwt-secret=/root/jwt.hex
-            - --data-path=/root/data
+            - --engine-jwt-secret=/besu/jwt.hex
+            - --data-path=/besu/data
           resources:
             requests:
               memory: 2G
@@ -54,9 +54,9 @@ spec:
               port: 8545
           volumeMounts:
             - name: chaindata
-              mountPath: /root/data
+              mountPath: /besu/data
             - name: jwt
-              mountPath: /root
+              mountPath: /besu
 
       volumes:
         - name: chaindata
