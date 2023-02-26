@@ -2,19 +2,19 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: besu
-  namespace: besu-teku
+  namespace: besu
 spec:
   selector:
     matchLabels:
-      app: besu-teku
+      app: besu
   replicas: 1
-  serviceName: besu-teku
+  serviceName: besu
   updateStrategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: besu-teku
+        app: besu
     spec:
       terminationGracePeriodSeconds: 300
       securityContext:
@@ -22,7 +22,7 @@ spec:
         runAsUser: 0
         runAsGroup: 0
       containers:
-        - name: besu-teku
+        - name: besu
           image: hyperledger/besu
           ports:
             - containerPort: 8545
@@ -41,6 +41,7 @@ spec:
             - --engine-rpc-enabled        
             - --engine-jwt-secret=/besu/jwt.hex
             - --data-path=/besu/data
+            - --Xnat-method-fallback-enabled=false
           resources:
             requests:
               memory: 2G
