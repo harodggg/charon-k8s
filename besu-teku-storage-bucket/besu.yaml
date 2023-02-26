@@ -41,7 +41,7 @@ spec:
             - --engine-rpc-enabled        
             - --engine-jwt-secret=/besu/jwt.hex
             - --data-path=/besu/data
-            - --Xnat-method-fallback-enabled=false
+            - --nat-method=KUBERNETES
           resources:
             requests:
               memory: 2G
