@@ -21,7 +21,7 @@ spec:
             - bn
             - --network=goerli
             - --checkpoint-sync-url=https://goerli.checkpoint-sync.ethdevops.io
-            - --execution-endpoint=http://nethermind.chain-ndl.svc.cluster.local:8545
+            - --execution-endpoint=http://nethermind.chain-ndl.svc.cluster.local:8551
             - --execution-jwt=/opt/jwt/jwt.hex
             - --datadir=/opt/app/beacon/
             - --debug-level=info

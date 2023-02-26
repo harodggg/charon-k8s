@@ -22,13 +22,20 @@ metadata:
 spec:
   ports:
     - protocol: TCP
-      targetPort: 4000
-      port: 4000
-      name: grpc
+      targetPort: 9000
+      port: 9000
+      name: tcp9000
+    - protocol: UDP
+      targetPort: 9000
+      name: udp9000
     - protocol: TCP
-      targetPort: 3500
-      port: 3500
-      name: jsonrpc
+      targetPort: 5052
+      port: 5052
+      name: api
+    - protocol: TCP
+      targetPort: 5054
+      port: 5054
+      name: metri
   selector:
     app: lighthouse
 
