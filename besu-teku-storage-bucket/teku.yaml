@@ -22,7 +22,7 @@ spec:
           image: consensys/teku
           args:
             - --network=goerli                             
-            - --ee-endpoint=http://besu.besu-teku.svc.cluster.local:8551          
+            - --ee-endpoint=http://nethermind.besu-teku.svc.cluster.local:8551          
             - --ee-jwt-secret-file=/root/jwt.hex
             - --metrics-enabled=true                       
             - --rest-api-enabled=true

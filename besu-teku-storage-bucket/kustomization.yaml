@@ -4,11 +4,12 @@ namespace: besu-teku
 resources:
   - pvc.yaml
   - service.yaml
-  - besu.yaml
+#  - besu.yaml
   - teku.yaml
   - namespace.yaml
   - mev-boost.yaml
-  - geth.yaml
+# - geth.yaml
+  - nethermind.yaml
 
 configMapGenerator:
   - name: besu-jwt

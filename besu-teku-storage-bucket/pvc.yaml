@@ -39,3 +39,17 @@ spec:
   storageClassName: csi-gcs
   accessModes:
     - ReadWriteOnce
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chaindata-nethermind
+spec:
+  resources:
+    requests:
+      storage: 1024Gi
+  volumeMode: Filesystem
+  storageClassName: csi-gcs
+  accessModes:
+    - ReadWriteOnce

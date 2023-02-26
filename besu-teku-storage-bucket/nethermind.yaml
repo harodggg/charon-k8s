@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: nethermind
-  namespace: chain-ndl
+  namespace: besu-teku
 spec:
   selector:
     matchLabels:
@@ -19,7 +19,7 @@ spec:
       terminationGracePeriodSeconds: 300
       containers:
         - name: nethermind
-          image: nethermind/nethermind
+          image: nethermind/nethermind:1.15.0
           ports:
             - containerPort: 8545
             - containerPort: 8551
@@ -68,5 +68,5 @@ spec:
           persistentVolumeClaim:
             claimName: chaindata-nethermind
         - configMap:
-            name: nethermind-jwt
+            name: besu-jwt
           name: jwt
