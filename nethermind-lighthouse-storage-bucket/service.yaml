@@ -25,9 +25,6 @@ spec:
       targetPort: 9000
       port: 9000
       name: tcp9000
-    - protocol: UDP
-      targetPort: 9000
-      name: udp9000
     - protocol: TCP
       targetPort: 5052
       port: 5052
