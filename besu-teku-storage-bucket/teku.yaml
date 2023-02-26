@@ -13,6 +13,10 @@ spec:
         app: teku
     spec:
       terminationGracePeriodSeconds: 300
+      securityContext:
+        fsGroup: 0
+        runAsUser: 0
+        runAsGroup: 0
       containers:
         - name: beacon
           image: consensys/teku
