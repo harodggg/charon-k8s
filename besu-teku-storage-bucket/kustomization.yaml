@@ -4,13 +4,12 @@ namespace: chain-ndl
 resources:
   - pvc.yaml
   - service.yaml
-  - nethermind.yaml
-  - lighthouse.yaml
+  - besu.yaml
+  - teku.yaml
   - namespace.yaml
   - mev-boost.yaml
-  - prysm.yaml
 configMapGenerator:
-  - name: nethermind-jwt
+  - name: besu-jwt
     files: ["jwt.hex"]
     options:
       disableNameSuffixHash: true
