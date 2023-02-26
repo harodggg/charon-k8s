@@ -17,6 +17,10 @@ spec:
         app: nethermind
     spec:
       terminationGracePeriodSeconds: 300
+      securityContext:
+        fsGroup: 0
+        runAsUser: 0
+        runAsGroup: 0
       containers:
         - name: nethermind
           image: nethermind/nethermind:1.15.0
