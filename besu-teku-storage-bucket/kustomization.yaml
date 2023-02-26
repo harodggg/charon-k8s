@@ -16,5 +16,5 @@ configMapGenerator:
 images:
   - name: hyperledger/besu
     newTag: latest
-  - name: sigp/lighthouse
-    newTag: v3.4.0
+  - name: consensys/teku
+    newTag: latest
