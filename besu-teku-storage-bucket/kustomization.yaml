@@ -14,7 +14,7 @@ configMapGenerator:
     options:
       disableNameSuffixHash: true
 images:
-  - name: nethermind/nethermind
-    newTag: 1.15.0
+  - name: hyperledger/besu
+    newTag: latest
   - name: sigp/lighthouse
     newTag: v3.4.0

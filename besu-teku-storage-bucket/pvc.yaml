@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chaindata-besu
+spec:
+  resources:
+    requests:
+      storage: 1024Gi
+  volumeMode: Filesystem
+  storageClassName: csi-gcs
+  accessModes:
+    - ReadWriteOnce

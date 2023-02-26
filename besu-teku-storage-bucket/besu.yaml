@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: besu
+  namespace: besu-teku
+spec:
+  selector:
+    matchLabels:
+      app: besu-teku
+  replicas: 1
+  serviceName: besu-teku
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: besu-teku
+    spec:
+      terminationGracePeriodSeconds: 300
+      containers:
+        - name: besu-teku
+          image: hyperledger/besu
+          ports:
+            - containerPort: 8545
+            - containerPort: 8551
+            - { containerPort: 30303, protocol: TCP }
+            - { containerPort: 30303, protocol: UDP }
+          args:
+            - --network=goerli            
+            - --rpc-http-enabled=true     
+            - --rpc-http-host=0.0.0.0     
+            - --rpc-http-cors-origins="*" 
+            - --rpc-ws-enabled=true       
+            - --rpc-ws-host=0.0.0.0       
+            - --host-allowlist="*"        
+            - --engine-host-allowlist="*" 
+            - --engine-rpc-enabled        
+            - --engine-jwt-secret=/root/jwt.hex
+            - --data-path=/root/data
+          resources:
+            requests:
+              memory: 2G
+              cpu: 1000m
+            limits:
+              memory: 16G
+              cpu: 8000m
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8545
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8545
+          volumeMounts:
+            - name: chaindata
+              mountPath: /root/data
+            - name: jwt
+              mountPath: /root
+
+      volumes:
+        - name: chaindata
+          persistentVolumeClaim:
+            claimName: chaindata-besu
+        - configMap:
+            name: besu-jwt
+          name: jwt
