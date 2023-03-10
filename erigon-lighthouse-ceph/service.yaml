@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nethermind
+  name: erigon-svc
 spec:
   ports:
     - protocol: TCP
@@ -13,5 +13,5 @@ spec:
       port: 8551
       name: authrpc
   selector:
-    app: nethermind
+    app: goerli-erigon
   type: ClusterIP
