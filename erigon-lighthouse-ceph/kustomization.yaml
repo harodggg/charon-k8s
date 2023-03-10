@@ -4,20 +4,19 @@ namespace: besu-teku
 resources:
   - pvc.yaml
   - service.yaml
-#  - besu.yaml
-#  - teku.yaml
+  - erigon.yaml
+  - lighthouse.yaml
   - namespace.yaml
-#  - mev-boost.yaml
-# - geth.yaml
-  - nethermind.yaml
+  - mev-boost.yaml
+  - pool.yaml
 
 configMapGenerator:
-  - name: besu-jwt
+  - name: erigon-jwt
     files: ["jwt.hex"]
     options:
       disableNameSuffixHash: true
 images:
-  - name: hyperledger/besu
+  - name: thorax/erigon
     newTag: latest
   - name: consensys/teku
     newTag: latest
