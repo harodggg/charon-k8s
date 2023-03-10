@@ -9,6 +9,7 @@ resources:
   - namespace.yaml
   - mev-boost.yaml
   - pool.yaml
+  - storageclass.yaml
 
 configMapGenerator:
   - name: erigon-jwt
