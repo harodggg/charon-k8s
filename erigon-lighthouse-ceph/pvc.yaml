@@ -2,11 +2,12 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: erigon-node-pvc
-  namespace: erigon-lighthouse-ceph
+  namespace: 
   labels:
     app: erigon-node 
 spec:
-  storageClassName: ergion-lighthouse-ceph-block
+  storageClassName: erigon-lighthouse-ceph-block
+                    
   accessModes:
     - ReadWriteOnce
   resources:
