@@ -42,6 +42,8 @@ spec:
           command: [
             "erigon",
             "--datadir=/home/erigon/goerli",
+            "--snapshots=true",
+            "--torrent.download.rate=64mb",
             "--chain=goerli",
             "--metrics",
             "--metrics.addr=0.0.0.0",
