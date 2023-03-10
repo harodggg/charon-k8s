@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: erigon-lighthouse-node-pvc
+  name: erigon-node-pvc
   namespace: erigon-lighthouse-ceph
   labels:
     app: erigon-node 

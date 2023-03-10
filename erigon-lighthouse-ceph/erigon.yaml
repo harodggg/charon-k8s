@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: goerli-erigon
-  namespace: erigon
+  namespace: ergion-lighthouse-ceph-block
 spec:
   selector:
     matchLabels:
@@ -49,7 +49,8 @@ spec:
             "--private.api.addr=localhost:9090",
             "--pprof",
             "--pprof.addr=0.0.0.0",
-            "--pprof.port=6061"
+            "--pprof.port=6061",
+            "--authrpc.jwtsecret=/data/jwt.hex"
           ]
           image: thorax/erigon
           ports:
@@ -62,10 +63,15 @@ spec:
               name: goerli-erigon-data
             - mountPath: /tmp
               name: tmp
+            - mountPath: /data
+              name: erigon-jwt
       restartPolicy: Always
       volumes:
         - name: goerli-erigon-data
           persistentVolumeClaim:
-            claimName: goerli-erigon-data
+            claimName: erigon-node-pvc
+        - name: erigon-jwt
+          configMap:
+            name: erigon-jwt
         - name: tmp
           emptyDir: {}

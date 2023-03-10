@@ -2,7 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: mev-boost
-  namespace: besu-teku
+  namespace: ergion-lighthouse-ceph-block
   labels:
     app: mev-boost
   annotations:
