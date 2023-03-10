@@ -34,8 +34,8 @@ spec:
             runAsUser: 1000
           resources:
             requests:
-              memory: 8Gi
-              cpu: 3000m
+              memory: 6Gi
+              cpu: 2000m
             limits:
               memory: 8Gi
               cpu: 3000m
