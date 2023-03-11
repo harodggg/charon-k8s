@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: goerli-erigon
-  namespace: ergion-lighthouse-ceph-block
+  namespace: erigon-lighthouse-ceph-block
 spec:
   selector:
     matchLabels:
