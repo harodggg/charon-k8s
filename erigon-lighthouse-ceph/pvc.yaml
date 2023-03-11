@@ -13,3 +13,16 @@ spec:
   resources:
     requests:
       storage: 200Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chaindata-lighthouse
+spec:
+  storageClassName: longhorn-sc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
