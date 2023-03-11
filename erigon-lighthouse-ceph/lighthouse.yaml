@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: lighthouse
+  namespace: ergion-lighthouse-ceph-block
+
 spec:
   selector:
     matchLabels:
