@@ -15,3 +15,91 @@ spec:
   selector:
     app: goerli-erigon
   type: ClusterIP
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: lighthouse-p2p
+  namespace: erigon-lighthouse-ceph
+  labels:
+    app: lighthouse-p2p
+  annotations:
+    kubesphere.io/creator: admin
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+spec:
+  ports:
+    - name: http-p2p
+      protocol: TCP
+      port: 30002
+      targetPort: 30002
+      nodePort: 30002
+  selector:
+    app: lighthouse
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  allocateLoadBalancerNodePorts: true
+  internalTrafficPolicy: Cluster
+  
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: lighthouse-enr
+  namespace: erigon-lighthouse-ceph
+  labels:
+    app: lighthouse-enr
+  annotations:
+    kubesphere.io/creator: admin
+  finalizers:
+    - service.kubernetes.io/load-balancer-cleanup
+spec:
+  ports:
+    - name: http-enr
+      protocol: TCP
+      port: 9000
+      targetPort: 9000
+      nodePort: 32510
+  selector:
+    app: lighthouse
+  type: LoadBalancer
+  sessionAffinity: None
+  externalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  allocateLoadBalancerNodePorts: true
+  internalTrafficPolicy: Cluster
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mev-boost
+  namespace: erigon-lighthouse-ceph
+  labels:
+    app: mev-boost
+  annotations:
+    kubesphere.io/creator: admin
+spec:
+  ports:
+    - name: http-mev
+      protocol: TCP
+      port: 18550
+      targetPort: 18550
+  selector:
+    app: mev-boost
+  clusterIP: None
+  clusterIPs:
+    - None
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster

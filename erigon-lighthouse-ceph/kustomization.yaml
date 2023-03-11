@@ -19,5 +19,5 @@ configMapGenerator:
 images:
   - name: thorax/erigon
     newTag: latest
-  - name: consensys/teku
+  - name: sigp/lighthouse 
     newTag: latest

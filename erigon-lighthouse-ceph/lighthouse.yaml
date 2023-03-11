@@ -32,13 +32,8 @@ spec:
             - --http-address=0.0.0.0
             - --builder=http://mev-boost.erigon-lighthouse-ceph.svc.cluster.local:18550
             - --http-port=5052
-            - --metrics
-            - --metrics-address=0.0.0.0
-            - --metrics-port=5054
-            - --metrics-allow-origin="*"
+            - --externalcl
           ports:
-            - containerPort: 5052
-              name: http-api
             - containerPort: 5054
               name: metrics
             - containerPort: 9000
@@ -71,7 +66,8 @@ spec:
       volumes:
         - name: chaindata
           persistentVolumeClaim:
-            claimName: chaindata-lighthouse
+            claimName: cl 
+
         - configMap:
             name: erigon-jwt
           name: gethjwt

@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: chaindata-lighthouse
+  name: cl
 spec:
   storageClassName: longhorn-sc
   accessModes:
