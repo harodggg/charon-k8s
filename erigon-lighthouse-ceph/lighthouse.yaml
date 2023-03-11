@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: lighthouse
-  namespace: erigon-lighthouse-ceph-block
+  namespace: erigon-lighthouse-ceph
 
 spec:
   selector:
